@@ -38,6 +38,7 @@ This web application consists of the following components:
 
 - Rancher Desktop/Docker
 - Pyenv `pip install virtualenv`
+- Minimum Node version 16 is rquired
 
 ## Environment Variables (Local Development)
 
@@ -50,6 +51,33 @@ This web application consists of the following components:
 
 1. From project root directory, run `docker compose -f docker-compose.yaml up --force-recreate`
 2. Wait for postgres DB to start up, and wait for sqitch schema to finish provisioning tables
+   
+   In case the process doesn't finish, follow these steps to delete all pods and Docker images from the Rancher Desktop app:
+   1. Open Rancher Desktop:
+      - Launch the Rancher Desktop application on your computer.
+   2. Access Kubernetes Dashboard:
+      - Navigate to the Kubernetes dashboard within Rancher Desktop.
+      - This can typically be done by selecting the 'Kubernetes' option from the sidebar or menu.
+   3. Delete All Pods:
+      - In the Kubernetes dashboard, go to the 'Workloads' section.
+      - Locate the 'Pods' subsection.
+      - Select all the pods listed.
+      - Select all the pods listed.
+      - Click the 'Delete' button to remove all selected pods.
+   4. Remove Docker Images:
+      - In the Kubernetes dashboard, go to the 'Workloads' section.
+      - Navigate to the 'Images' section in Rancher Desktop.
+      - You will see a list of all Docker images.
+      - Select all images you wish to delete.
+      - Click the 'Delete' button to remove the selected Docker images.
+   5. Confirm Deletion:
+      - Confirm any prompts that ask for verification of deletion.
+      - Ensure that all selected pods and Docker images have been successfully removed.
+   6. Verify Cleanup:
+      - Return to the 'Workloads' and 'Images' sections to verify that no pods or Docker images remain.
+      - If there are still some items left, repeat the deletion steps.
+   7. From project root directory, run `docker compose -f docker-compose.yaml up --force-recreate`
+
 3. ctrl-c to stop the process once logs are quiet
 4. Run `docker compose -f docker-compose.yaml -f docker-compose.minio.yaml up`
 5. From `webclient` run `npm i`
@@ -65,6 +93,13 @@ This web application consists of the following components:
 12. From `server` directory, run `export PYTHONPATH=.`
 13. From `server` directory, run `procrastinate --verbose --app=procrastinateworker.worker.app worker`
     - This starts the Procrastinate worker that processes the PDF files
+
+    If you encounter any database errors after running the command, follow these steps:
+    1. Set the Database Host:
+       - From your `server` directory in the terminal.
+       - Run the following command to set the database host to 127.0.0.1:
+         `export DB_HOST=127.0.0.1`
+       - Run again `procrastinate --verbose --app=procrastinateworker.worker.app worker`
 
 ## Using the UI
 
