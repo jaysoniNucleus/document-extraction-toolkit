@@ -38,7 +38,7 @@ This web application consists of the following components:
 
 - Rancher Desktop/Docker
 - Pyenv `pip install virtualenv`
-- Minimum Node version 16 is rquired
+- Minimum Node version 16 is required
 
 ## Environment Variables (Local Development)
 
